@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <script src="https://d3js.org/d3.v3.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div id="header">
+      {% block content_header %}
+      {% endblock %}
+  </div>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+      {% block footer %}
+      &copy; Copyright 2010 by <a href="#">you</a>.
+      {% endblock %}
+    </div>
+  </body>
+</html>
+{% block postscript %}{% endblock %}
+
+
+
+

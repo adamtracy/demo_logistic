@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content_header %}
+    <p id="attributestext" style="position:absolute; margin-left:300px; pointer-events: none;"></p>
+{% endblock %}
+{% block content %}
+  <h1>Index</h1>
+  <p class="internal">
+    Welcome on my awesome homepage.
+{% endblock %}
+{% block footer %}
+      This code is free for anyone, available on <a href="https://github.com/adamtracy/demo_logistic">GitHub.</a>
+{% endblock %}
+
+{% block postscript %}
+<!-- you have to load your d3 code *after* the basic HTML DOM structure has been
+     loaded, otherwise you will get a blank stare -->
+ <script type="text/javascript" src="{{ url_for('static', filename='logistic.js') }}"></script>
+{% endblock %}
