@@ -11,9 +11,7 @@ https://github.com/billautomata/d3js_design_patterns/blob/master/volume-1.md
 Notes on running a flask app on EC2
 http://www.datasciencebytes.com/bytes/2015/02/24/running-a-flask-app-on-aws-ec2/
 
-###################
-### older notes ###
-###################
+# older notes
 
 did an install of flask api created this project and have learned about flask
 
@@ -28,9 +26,9 @@ quickstart: http://flask-sqlalchemy.pocoo.org/2.1/quickstart/#a-minimal-applicat
 $ sudo easy_install sqlalchemy
 $ sudo easy_install Flask-SQLAlchemy
 
-##
-## OurSQL
-##
+#
+# OurSQL
+#
 # OurSQL does not appear to be simpatico with Flask/SQLAlchemy.  The commit()
 # never returns.  I've since reverted to using the basic MySQL connection api
 # that comes with python.
@@ -53,9 +51,9 @@ db.create_all()
 
 
 
-###
-### testing sqlalchemy from console
-###
+#
+# testing sqlalchemy from console
+#
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
