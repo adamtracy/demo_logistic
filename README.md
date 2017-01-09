@@ -1,15 +1,26 @@
 # demo_logistic
-getting used to flask application server, d3 rendition of Logistic Equation
+Learning about Flask application server by drawing the Logistic Map.  Some other technologies applied
+* D3JS
+* spinner.js
+* nginx (For EC2)
+# Dev client 
+## setup
+```
+# get easy_install
+yum install python-setuptools
+# base Flask install
+easy_install Flask
+# numpy had to be installed using yum
+yum install numpy
+```
+## Running
+launches the server from the command line on port 5000
+```
+python ./application.py 
+```
 
-## To Run
-1) install flask
-2) python ./application.py launches the server from the command line on port 5000 (hopefully)
-
-## D3JS application scheme
-https://github.com/billautomata/d3js_design_patterns/blob/master/volume-1.md
-
-# Running  on EC2
-My instance
+# EC2 Installation
+## My instance
 ssh -i "flask-dev.pem" ec2-user@ec2-54-183-26-194.us-west-1.compute.amazonaws.com
 
 
