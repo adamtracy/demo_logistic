@@ -5,6 +5,9 @@ To Run
 1) install flask
 2) python ./application.py launches the server from the command line on port 5000 (hopefully)
 
+D3JS application schemata
+https://github.com/billautomata/d3js_design_patterns/blob/master/volume-1.md
+
 Notes on running a flask app on EC2
 http://www.datasciencebytes.com/bytes/2015/02/24/running-a-flask-app-on-aws-ec2/
 
