@@ -1,7 +1,7 @@
 from flask import Flask, Response
 from flask import render_template
 
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 
 from logistic import LogisticEquation
 import json
@@ -17,8 +17,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://adamtracy@localhost/flask_test'
 # when using regular sqlalchemy, you interact with the engine directly (i think).
 # Flask appears to manage this for you, perhaps for resource management, etc.
 #
-# engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-
+"""
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 db = SQLAlchemy(app)
 
 
@@ -38,7 +38,7 @@ class User(db.Model):
 @app.route('/hello/<name>')
 def hello(name=None):
     return render_template('hello.html', name=name)
-
+"""
 
 @app.route('/')
 def index():
