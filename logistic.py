@@ -42,13 +42,6 @@ class LogisticEquation:
     def logistic(r, x):
         return r * (x * (1-x))
 
-    def run_iter(self, x, r, points):
-        for _ in itertools.repeat(None, self.num_iterations):
-            x = self.logistic(r, x)
-            # check to see if x is in range of x_min/max
-            if self.x_min <= x <= self.x_max:
-                points.append([round(r, 5), round(x, 5)])
-
     def calc(self):
         # seed the calculation with a basic starting point.
         x = self.logistic(self.r_min, 0.5)
@@ -64,7 +57,7 @@ class LogisticEquation:
                     x = self.logistic(r, x)
                     # check to see if x is in range of x_min/max
                     if self.x_min <= x <= self.x_max:
-                        points.append([round(r, 5), round(x, 5)])
+                        points.append([r, x])
                 if len(points) >= self.num_iterations:
                     break
             self.plot.extend(points)
