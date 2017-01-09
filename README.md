@@ -1,10 +1,11 @@
-# demo_logistic
 Learning about Flask application server by drawing the Logistic Map.  Some other technologies applied
 * D3JS
 * spinner.js
 * nginx (For EC2)
-# Dev client 
-## setup
+
+dev client 
+----------
+### setup
 ```
 # get easy_install
 yum install python-setuptools
@@ -13,48 +14,56 @@ easy_install Flask
 # numpy had to be installed using yum
 yum install numpy
 ```
-## Running
+### Running
 launches the server from the command line on port 5000
 ```
 python ./application.py 
 ```
 
-# EC2 Installation
-## My instance
+EC2 Installation
+----------------
+### access to my instance
+I chose a Redhat Linux VM, opened HTTP port 80 to the world network security section
+```
 ssh -i "flask-dev.pem" ec2-user@ec2-54-183-26-194.us-west-1.compute.amazonaws.com
-
-
-http://www.datasciencebytes.com/bytes/2015/02/24/running-a-flask-app-on-aws-ec2/
-
-
+```
+### Install python extensions
+```
 sudo su -
 yum install python-setuptools
 easy_install Flask
 yum install git
 yum install numpy
+```
+### Checkout git project and fire it up
 
+### Install nginx front end
+I followed these instructions though I did not use the http://gunicorn.org/ front end, instead using the default flask wsgi
 
-### https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html
-I gave up on this one
+https://www.matthealy.com.au/blog/post/deploying-flask-to-amazon-web-services-ec2/
 
-### https://www.matthealy.com.au/blog/post/deploying-flask-to-amazon-web-services-ec2/
-This seems better, though I did not use the http://gunicorn.org/ front end, instead using the default flask wsgi
+### install nginx
 
-#####install nginx
-create /etc/yum.repos.d/nginx.repo (adding rhel/7)
+add the following file to the yum repos: /etc/yum.repos.d/nginx.repo (adding rhel/7)
+```
 [nginx]
 name=nginx repo
 baseurl=http://nginx.org/packages/mainline/rhel/7/$basearch/
 gpgcheck=0
 enabled=1
-then do yum install nginx
-
+```
+then install nginx
+```
+yum install nginx
+```
+There were some weird problems with nginx connecting to the flask server.  Some poking around on the web said I should do this
+```
 cat /var/log/audit/audit.log | grep nginx | grep denied | audit2allow -M mynginx
 semodule -i mynginx.pp
+```
 
-
-# older notes
-
+older notes
+-----------
 ## did an install of flask api created this project and have learned about flask
 
 decorators used for request handling
