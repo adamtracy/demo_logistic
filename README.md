@@ -1,6 +1,5 @@
-Learning about Flask application server by drawing the Logistic Map.  Some other technologies applied
+Learning about Flask application server with an interactive Logistic Map tool that allows rubberbanding segments of the plot to zoom deeper into the fractal.  Some other technologies applied
 * D3JS
-* spinner.js
 * nginx (For EC2)
 
 dev client 
