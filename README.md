@@ -5,13 +5,17 @@ getting used to flask application server, d3 rendition of Logistic Equation
 1) install flask
 2) python ./application.py launches the server from the command line on port 5000 (hopefully)
 
-## D3JS application schemata
+## D3JS application scheme
 https://github.com/billautomata/d3js_design_patterns/blob/master/volume-1.md
 
-## Notes on running a flask app on EC2
+# Running  on EC2
+My instance
+ssh -i "flask-dev.pem" ec2-user@ec2-54-183-26-194.us-west-1.compute.amazonaws.com
+
+
 http://www.datasciencebytes.com/bytes/2015/02/24/running-a-flask-app-on-aws-ec2/
 
-ssh -i "flask-dev.pem" ec2-user@ec2-54-183-26-194.us-west-1.compute.amazonaws.com
+
 sudo su -
 yum install python-setuptools
 easy_install Flask
@@ -19,6 +23,23 @@ yum install git
 yum install numpy
 
 
+### https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html
+I gave up on this one
+
+### https://www.matthealy.com.au/blog/post/deploying-flask-to-amazon-web-services-ec2/
+This seems better, though I did not use the http://gunicorn.org/ front end, instead using the default flask wsgi
+
+#####install nginx
+create /etc/yum.repos.d/nginx.repo (adding rhel/7)
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/mainline/rhel/7/$basearch/
+gpgcheck=0
+enabled=1
+then do yum install nginx
+
+cat /var/log/audit/audit.log | grep nginx | grep denied | audit2allow -M mynginx
+semodule -i mynginx.pp
 
 
 # older notes
