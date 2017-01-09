@@ -1,7 +1,9 @@
 # demo_logistic
 getting used to flask application server, d3 rendition of Logistic Equation
 
-
+To Run
+1) install flask
+2) python ./application.py launches the server from the command line on port 5000 (hopefully)
 
 
 ###################
