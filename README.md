@@ -11,6 +11,16 @@ https://github.com/billautomata/d3js_design_patterns/blob/master/volume-1.md
 ## Notes on running a flask app on EC2
 http://www.datasciencebytes.com/bytes/2015/02/24/running-a-flask-app-on-aws-ec2/
 
+ssh -i "flask-dev.pem" ec2-user@ec2-54-183-26-194.us-west-1.compute.amazonaws.com
+sudo su -
+yum install python-setuptools
+easy_install Flask
+yum install git
+yum install numpy
+
+
+
+
 # older notes
 
 ## did an install of flask api created this project and have learned about flask
