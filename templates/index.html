@@ -4,15 +4,23 @@
   {{ super() }}
 {% endblock %}
 {% block content_header %}
-    <p id="attributestext" style="position:absolute; margin-left:300px; pointer-events: none;"></p>
+    {{ super() }}
 {% endblock %}
 {% block content %}
-  <h1>Index</h1>
-  <p class="internal">
-    Welcome on my awesome homepage.
+    <h1>Logistic Equation Calculator</h1>
+
 {% endblock %}
 {% block footer %}
-      This code is free for anyone, available on <a href="https://github.com/adamtracy/demo_logistic">GitHub.</a>
+    <p><a href="/">Start Over</a></p>
+    <p class="internal">
+        See: <a href="https://en.wikipedia.org/wiki/Logistic_map">https://en.wikipedia.org/wiki/Logistic_map</a>
+    <p>
+        Xn+1 = R*Xn(1-Xn)
+        where Xn is a number between zero and one that represents the ratio of existing population
+        to the maximum possible population. The values of interest for the parameter
+        R are those in the interval 0,4
+    <p>
+        This code is free for anyone, available on <a href="https://github.com/adamtracy/demo_logistic">GitHub.</a>
 {% endblock %}
 
 {% block postscript %}

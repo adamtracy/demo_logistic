@@ -1,6 +1,13 @@
+/**
+ *
+ * logistic.js - client side D3 rendering based on control inputs and
+ * server data response.
+ *
+ */
 
-
-// I'm in charge of x, y scaling and render the axes
+/**
+ * I'm in charge of x, y scaling and render the axes
+ */
 function Graph(display_opts) {
     this.opts = display_opts;
 
@@ -21,7 +28,8 @@ function Graph(display_opts) {
 
 
      // normally if you hadn't apriori knowledge of the domain, you'd be able to derive it using
-     // some d3.min or d3.max() but luckily we don't have to know this.
+     // some d3.min or d3.max() but luckily we don't have to run through the entire dataset to
+     // find min/max.
      this.initScales = function() {
          this.xScale = d3.scale.linear()
                         .nice()
@@ -51,6 +59,13 @@ function Graph(display_opts) {
             .attr("class", "axis")
             .attr("transform", "translate(0," + (this.h() - this.padding()) + ")")
             .call(xAxis);
+        // x axis label
+        svg.append("text")
+            .attr("class", "axis")
+            .attr("text-anchor", "end")
+            .attr("x", this.w()/2)
+            .attr("y", this.h())
+            .text("Rho");
 
         var yAxis = d3.svg.axis()
                   .scale(this.yScale)
@@ -59,11 +74,20 @@ function Graph(display_opts) {
             .attr("class", "axis")
             .attr("transform", "translate(" + (this.padding() + 10) + ", 0)")
             .call(yAxis);
+         // y axis label
+         svg.append("text")
+            .attr("class", "axis rotate")
+            .attr("text-anchor", "end")
+            .attr("x", -1*this.h()/2)
+            .attr("y", "10")
+            .text("X");
     }
 };
 
+/**
+ *  I  keep track of the current selection rubber band region in the display.
+ */
 function StretchRect(svg, xScale, yScale) {
-    // I  keep track of the current selection rubber band region in the display.
     this.xScale = xScale;
     this.yScale = yScale;
     this.svg = svg;
@@ -106,14 +130,6 @@ function StretchRect(svg, xScale, yScale) {
 		};
 	};
 
-	this.getCurrentAttributesAsText = function() {
-		var attrs = this.getCurrentAttributes();
-		return "x1: " + xScale.invert(attrs.x1)
-		   + " x2: " + xScale.invert(attrs.x2)
-		   + " y1: " + yScale.invert(attrs.y1)
-		   + " y2: " + yScale.invert(attrs.y2);
-	};
-
 	this.init = function(newX, newY) {
 		var rectElement = this.svg.append("rect")
 		    .attr({
@@ -135,12 +151,6 @@ function StretchRect(svg, xScale, yScale) {
 		this.rect.attr(this.getNewAttributes());
 	};
 
-	this.focus = function() {
-        this.rect
-            .style("stroke", "#DE695B")
-            .style("stroke-width", "2.5");
-    };
-
     this.remove = function() {
     	this.rect.remove();
     	this.rect = null;
@@ -154,6 +164,9 @@ function StretchRect(svg, xScale, yScale) {
 
 };
 
+/**
+ * The "main" render function
+ */
 function render(dataset, graph) {
     var svg = d3.select("#plot")
     var xScale = graph.xScale;
@@ -182,8 +195,6 @@ function render(dataset, graph) {
     function dragMove() {
         var p = d3.mouse(this);
         selectionRect.update(p[0], p[1]);
-        d3.select("#attributestext")
-            .text(selectionRect.getCurrentAttributesAsText());
     }
 
     function dragEnd() {
@@ -191,23 +202,14 @@ function render(dataset, graph) {
         var finalAttributes = selectionRect.getCurrentAttributes();
         console.dir(finalAttributes);
         if(finalAttributes.x2 - finalAttributes.x1 > 1 && finalAttributes.y2 - finalAttributes.y1 > 1){
-            console.log("range selected");
-            // range selected
             d3.event.sourceEvent.preventDefault();
-            selectionRect.focus();
             var attrs = selectionRect.getCurrentAttributes();
-            /*
-            graph.r_min=xScale.invert(attrs.x1);
-            graph.r_max=xScale.invert(attrs.x2);
-            graph.x_min=yScale.invert(attrs.y1);
-            graph.x_max=yScale.invert(attrs.y2);
-            */
             graph.invert(attrs);
             graph.draw();
             var target = document.getElementById('content');
             var spinner = new Spinner(spinner_opts).spin(target);
-            d3.json('/logistic/'+graph.r_min()+'/'+graph.r_max()+'/'+graph.x_min()+'/'+graph.x_max(),
-                function(json){render(json, graph); spinner.stop();} );
+            var url = '/logistic/'+graph.r_min()+'/'+graph.r_max()+'/'+graph.x_min()+'/'+graph.x_max();
+            d3.json(url, function(json){render(json, graph); spinner.stop();} );
 
         } else {
             // null selection
@@ -224,14 +226,9 @@ function render(dataset, graph) {
 
 };
 
-// global starting points here
-/*
-var r_min = 2.5;
-var r_max = 4.0001;
-var x_min = 0;
-var x_max = 1;
-*/
-
+/**
+ *  Globally scoped variables and
+ */
 // options for spinner which is engaged while the back
 // end chooches over the data (http://spin.js.org/)
 var spinner_opts = {
@@ -264,17 +261,19 @@ var display_opts = {
     x_max: 1.0001,
     w: 900,
     h: 400,
-    padding: 20,
+    padding: 30,
+    // TODO preserve Aspect Ratio of display port for rubber-banding
     AR: 0.44
 };
 
-//graph = new Graph(r_min, r_max, x_min, x_max)
+
+/**
+ *  These methods called when the document loads to get the ball rolling.
+ */
 var graph = new Graph(display_opts);
-
-
-
 graph.draw();
 var target = document.getElementById('content');
 var spinner = new Spinner(spinner_opts).spin(target);
-d3.json('/logistic/'+display_opts.r_min+'/'+display_opts.r_max +'/'+display_opts.x_min+'/'+display_opts.x_max, function(json){render(json, graph); spinner.stop()} );
+var url = '/logistic/'+display_opts.r_min+'/'+display_opts.r_max +'/'+display_opts.x_min+'/'+display_opts.x_max;
+d3.json(url, function(json){render(json, graph); spinner.stop()} );
 
