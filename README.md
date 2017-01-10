@@ -2,7 +2,8 @@ Learning about Flask application server with an interactive Logistic Map tool th
 * D3JS
 * nginx (For EC2)
 
-An instance of this app can be seen on [www.demo.adamtracystudio.com]
+An instance of this app can be seen on http:/demo.adamtracystudio.com
+
 
 dev client 
 ----------
