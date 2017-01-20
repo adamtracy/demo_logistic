@@ -22,6 +22,20 @@ launches the server from the command line on port 5000
 python ./application.py 
 ```
 
+OAuth trial
+-----------
+Google API page https://console.developers.google.com/apis/credentials?project=teak-strength-156021
+'''
+easy_install Flask-OAuth
+easy_install Flask-Login
+easy_install Flask-Principal
+easy_install rauth
+'''
+
+http://stackoverflow.com/questions/9499286/using-google-oauth2-with-flask
+to test your app locally, add a line mapping your machine's ip to demo.adamtracystudio.com in the /etc/hosts file
+
+
 EC2 Installation
 ----------------
 ### access to my instance
