@@ -5,7 +5,7 @@
     <script type="text/javascript" src="{{ url_for('static', filename='d3.v3.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='spin.min.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{{ title }}{% endblock %}</title>
     {% endblock %}
   </head>
   <body>
@@ -16,7 +16,7 @@
     <div id="content">{% block content %}{% endblock %}</div>
     <div id="footer">
       {% block footer %}
-      &copy; Copyright 2010 by <a href="#">you</a>.
+      &copy; Copyright 2017 by <a href="#">adam</a>.
       {% endblock %}
     </div>
   </body>

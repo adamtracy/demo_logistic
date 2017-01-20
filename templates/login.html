@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}{{ super() }}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content_header %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+       <div id="sign-in">
+        <p>Please sign in via Google</p>
+        <p>
+           <a href={{ url_for('oauth_authorize', provider='google') }}>
+            <img src="{{ url_for('static', filename='img/btn_google_signin_dark_normal_web.png') }}" />
+           </a>
+        </p>
+    </div>
+
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+
+{% block postscript %}
+{% endblock %}
