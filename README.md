@@ -19,7 +19,7 @@ yum install numpy
 ### Running
 launches the server from the command line on port 5000
 ```
-python ./application.py 
+./run.py 
 ```
 
 OAuth trial
